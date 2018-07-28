@@ -11,7 +11,7 @@ module.exports = (db) => {
     // });
 
     return db.users
-      .get()
+      .list()
       .then((users) => {
         console.log(users);
         return users.map((user) => user.serialize())
