@@ -1,10 +1,9 @@
 const Knex = require("knex");
 
 module.exports = function(config) {
-  // initialize a connection to the database, and pass this
-  // to the various submodules within
-  console.log({ ...config.db });
 
+  // initialize connection to database,
+  // pass connection to submodules.
   const knex = Knex({ ...config.db });
 
   return {
