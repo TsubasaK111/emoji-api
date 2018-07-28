@@ -4,7 +4,7 @@
   "description": "add, search and use emojis wherever you please with this RESTful API",
   "main": "index.js",
   "scripts": {
-    "preinstall": "sudo -u postgres -i | echo 'CREATE DATABASE emoji_api;' | psql",
+    "preinstall": "echo 'CREATE DATABASE emoji_api;' | psql",
     "postinstall": "yarn migrate",
     "test": "mocha test && yarn lint",
     "lint": "eslint --fix ./**/*.js",

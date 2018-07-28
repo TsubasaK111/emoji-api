@@ -1,17 +1,19 @@
 // DEPENDENCIES
 
+const fs = require("fs");
+const path = require("path");
+
 const config = require("./config.js");
 // Database and other interfacing with external APIs)
-const services = require("./services")(config);
-// Routes. Initialized 'services' dependencies are explicitly injected.
-const apiRouter = require("./routes/api")(services);
+const db = require("./db")(config);
+// Routes. Initialized 'db' dependencies are explicitly injected.
+const apiRouter = require("./routes/api")(db);
 // logs your requests
 const morgan = require("morgan"); 
 //enables express to parse JSON
 const bodyParser = require("body-parser"); 
 
 const express = require("express");
-
 const app = express();
 
 
@@ -60,5 +62,5 @@ app.use((err, req, res, next) => {
 
 // START SERVER
 app.listen(config.express.port, () => {
-  logger.log(`Server up and listening on port ${config.express.port}`);
+  console.info(`Server up and listening on port ${config.express.port}`);
 });

@@ -1,5 +1,7 @@
 const config = require("../config.js");
 
+console.log(config);
+
 // Pass this file in `--knexfile` argument when
 // executing any `knex migrate` cli commands.
 const knexConfigs = {
@@ -8,4 +10,5 @@ const knexConfigs = {
   migrations: { tableName: "knex_migrations" },
 };
 
+// console.log(knexConfigs);
 module.exports = knexConfigs;

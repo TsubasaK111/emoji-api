@@ -6,7 +6,7 @@ module.exports = {
       host: "127.0.0.1",
       database: "emoji_api",
     },
-    port: 33071,
+    port: 3307,
   },
 
   // port for server to run on
