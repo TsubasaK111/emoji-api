@@ -17,6 +17,6 @@ class User{
 
 module.exports = (knex) => {
   return {
-    get: require("./get")(knex, User),
+    list: require("./list")(knex, User),
   };
 };

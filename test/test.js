@@ -2,7 +2,7 @@ const { expect } = require("chai");
 ``;
 const config = require("../config");
 const knex = require("knex")(config.db);
-// const db = require("../db")(config);
+const db = require("../db")(config);
 
 const { clearTable } = require("./helper.js");
 // const { forcePromiseReject } = require("./helper.js");
@@ -12,7 +12,6 @@ describe("emoji_api", () => {
 
   before("initialize database", (done) => {
     tables = ["users"];
-
     Promise.all(tables.map(clearTable)).then(() => done());
   });
 
@@ -21,12 +20,28 @@ describe("emoji_api", () => {
   });
 
   describe("users", () => {
-    describe("setup", () => {
-      it("has run the initial migrations", (done) => {
+    it("setup has run the initial migrations", (done) => {
+      knex("users")
+        .select()
+        .then(() => done())
+        .catch((e) => console.log(e));
+    });
+
+    context("with dummy data", () => {
+      before("add users", (done) => {
         knex("users")
-          .select()
-          .then(() => done())
-          .catch((e) => console.log(e));
+          .insert([{ name: "dude" }, { name: "dudess" }])
+          .then(() => {
+            done();
+          });
+      });
+
+      it("lists users", (done) => {
+        db.users.list().then((users) => {
+          expect(users).to.be.an("array");
+          expect(users).to.have.lengthOf(2);
+          done();
+        });
       });
     });
   });
