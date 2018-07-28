@@ -4,7 +4,7 @@ module.exports = {
     client: "pg",
     connection: {
       host: "127.0.0.1",
-      database: "emoji_api_db",
+      database: "emoji_api",
     },
     port: 33071,
   },

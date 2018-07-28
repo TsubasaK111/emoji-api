@@ -4,11 +4,13 @@
   "description": "add, search and use emojis wherever you please with this RESTful API",
   "main": "index.js",
   "scripts": {
+    "preinstall": "sudo -u postgres -i | echo 'CREATE DATABASE emoji_api;' | psql",
+    "postinstall": "yarn migrate",
     "test": "mocha test && yarn lint",
     "lint": "eslint --fix ./**/*.js",
     "start": "node index.js",
-    "migrate": "knex migrate:latest --knexfile services/db/knexfile.js",
-    "rollback": "knex migrate:rollback --knexfile services/db/knexfile.js"
+    "migrate": "knex migrate:latest --knexfile db/knexfile.js",
+    "rollback": "knex migrate:rollback --knexfile db/knexfile.js"
   },
   "author": "TsubasaK111",
   "dependencies": {
