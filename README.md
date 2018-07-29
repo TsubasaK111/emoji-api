@@ -1,5 +1,7 @@
 <!-- This was created during my time as a student at Code Chrysalis -->
 
+<!-- TODO: search feature http://rachbelaid.com/postgres-full-text-search-is-good-enough/ -->
+
 # emoji-api
 add, search and use emojis whereever you please with this RESTful API!
 
