@@ -1,4 +1,4 @@
-<!-- TODO: nodemon -->
+<!-- This was created during my time as a student at Code Chrysalis -->
 
 # emoji-api
 add, search and use emojis whereever you please with this RESTful API!
