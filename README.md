@@ -23,6 +23,7 @@ add, search and use emojis whereever you please with this RESTful API!
  - [node](https://nodejs.org/en/)
  - [yarn](https://yarnpkg.com/en/)
  - [knex](https://knexjs.org/#Installation) (`npm install knex --global`)
+ - [nodemon](https://github.com/remy/nodemon#nodemon) (`npm install nodemon --global`)
 
 <!-- ## Getting Started:  -->
 <!-- TODO -->
