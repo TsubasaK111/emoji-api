@@ -15,6 +15,7 @@
   "author": "TsubasaK111",
   "dependencies": {
     "body-parser": "^1.17.2",
+    "chai-http": "^4.0.0",
     "express": "^4.15.3",
     "knex": "^0.13.0",
     "moment": "^2.18.1",
