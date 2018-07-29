@@ -1,5 +1,6 @@
-const config = require("../config");
-const knex = require("knex")(config.db);
+import * as config from "../config"
+import * as knex from "knex";
+knex(config.db);
 
 function clearTable(tableName) {
   return knex(tableName)
@@ -17,4 +18,4 @@ function forcePromiseReject() {
 
 console.log("helper dawgs");
 
-module.exports = { clearTable, forcePromiseReject };
+export { clearTable, forcePromiseReject };

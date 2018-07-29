@@ -1,8 +1,13 @@
 
 class User{
+
+  id: number;
+  name: string;
+  createdAt: Date;
+   
   constructor(dbUser){
     this.id = dbUser.id;
-    this.username = dbUser.username;
+    this.name = dbUser.name;
     this.createdAt = new Date(dbUser.created_at);
   }
 
@@ -10,12 +15,12 @@ class User{
   // Formats object, removes any data that shouldn't be sent to client.
     return {
       id: this.id,
-      username: this.username
+      name: this.name
     };
   };
 }
 
-module.exports = (knex) => {
+export default (knex) => {
   return {
     list: require("./list")(knex, User),
   };

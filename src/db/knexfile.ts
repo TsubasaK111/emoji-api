@@ -1,6 +1,4 @@
-const config = require("../config.js");
-
-console.log(config);
+import config from "../config"
 
 // Pass this file in `--knexfile` argument when
 // executing any `knex migrate` cli commands.

@@ -1,4 +1,4 @@
-module.exports = {
+const config = {
   // database connection configs
   db: {
     client: "pg",
@@ -14,3 +14,6 @@ module.exports = {
     port: 3001,
   }
 };
+
+export default config;
+// module.exports = config;

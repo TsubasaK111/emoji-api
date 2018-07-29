@@ -1,11 +1,11 @@
-const { expect } = require("chai");
-``;
-const config = require("../config");
-const knex = require("knex")(config.db);
-const db = require("../db")(config);
+import { expect } from "chai";
 
-const { clearTable } = require("./helper.js");
-// const { forcePromiseReject } = require("./helper.js");
+// import * as config from "config"
+import knex = require("knex"); knex(config.db);
+import db = require("../db"); db(config);
+
+import { clearTable } from "./helper.js";
+// import  { forcePromiseReject } from "./helper.js";
 
 describe("emoji_api", () => {
   let tables;

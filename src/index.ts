@@ -1,19 +1,22 @@
 // DEPENDENCIES
 
-const fs = require("fs");
-const path = require("path");
+import * as fs from "fs";
+import * as path from "path";
 
-const config = require("./config.js");
+// import config from "../config"
+const config = require("../config");
+
 // Database and other interfacing with external APIs)
-const db = require("./db")(config);
+import db = require("./db"); 
+db(config);
 // Routes. Initialized 'db' dependencies are explicitly injected.
-const apiRouter = require("./routes/api")(db);
+import apiRouter = require("./routes/api"); apiRouter(db);
 // logs your requests
-const morgan = require("morgan"); 
+import * as morgan from "morgan";
 //enables express to parse JSON
-const bodyParser = require("body-parser"); 
+import * as bodyParser from "body-parser";
 
-const express = require("express");
+import * as express from "express"
 const app = express();
 
 
