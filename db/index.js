@@ -5,5 +5,5 @@ module.exports = function(config) {
   // pass connection to submodules.
   const knex = Knex({ ...config.db });
 
-  return { users: require("./users")(knex) };
+  return { emojis: require("./emojis")(knex) };
 };

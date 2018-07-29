@@ -11,7 +11,7 @@ describe("emoji_api", () => {
   let tables;
 
   before("initialize database", (done) => {
-    tables = ["users"];
+    tables = ["emojis", "tags", "emojis_tags"];
     Promise.all(tables.map(clearTable)).then(() => done());
   });
 
@@ -19,27 +19,27 @@ describe("emoji_api", () => {
     expect(true).to.be.true;
   });
 
-  describe("users", () => {
+  describe("emojis", () => {
     it("setup has run the initial migrations", (done) => {
-      knex("users")
+      knex("emojis")
         .select()
         .then(() => done())
         .catch((e) => console.log(e));
     });
 
     context("with dummy data", () => {
-      before("add users", (done) => {
-        knex("users")
-          .insert([{ name: "dude" }, { name: "dudess" }])
+      before("add emojis", (done) => {
+        knex("emojis")
+          .insert([{ name: "dude", uri: " " }, { name: "dudess", uri: " " }])
           .then(() => {
             done();
           });
       });
 
-      it("lists users", (done) => {
-        db.users.list().then((users) => {
-          expect(users).to.be.an("array");
-          expect(users).to.have.lengthOf(2);
+      it("lists emojis", (done) => {
+        db.emojis.list().then((emojis) => {
+          expect(emojis).to.be.an("array");
+          expect(emojis).to.have.lengthOf(2);
           done();
         });
       });
