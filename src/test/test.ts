@@ -12,7 +12,8 @@ describe("emoji_api", () => {
 
   before("initialize database", (done) => {
     tables = ["users"];
-    Promise.all(tables.map(clearTable)).then(() => done());
+    Promise.all(tables.map(clearTable))
+      .then(() => done());
   });
 
   it("true should be tru", () => {

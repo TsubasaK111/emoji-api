@@ -8,6 +8,4 @@ const knexConfigs = {
   migrations: { tableName: "knex_migrations" },
 };
 
-// console.log(knexConfigs);
-export default knexConfigs;
-// module.exports = knexConfigs;
+module.exports = knexConfigs;
