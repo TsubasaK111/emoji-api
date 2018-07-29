@@ -3,6 +3,7 @@ class Emoji{
   constructor(dbEmoji){
     this.id = dbEmoji.id;
     this.name = dbEmoji.name;
+    this.uri = dbEmoji.uri;
     this.createdAt = new Date(dbEmoji.created_at);
   }
 

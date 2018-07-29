@@ -1,27 +1,44 @@
-const Promise = require("bluebird");
+function validateInput(text) {
+  return (typeof text === "string") &&
+    (text.replace(" ", "").length > 2);
+}
 
-const validateEmojiname = (name) => {
-  return (typeof name === "string") && 
-    (name.replace(" ", "").length > 2);
+function formatInput(text) {
+  return text.trim().toLowerCase();
 }
 
 module.exports = (knex, Emoji) => {
   return (params) => {
-    const name = params.name;
-
-    return Promise.try(() => {
-      if (!validateEmojiname(name))
+    return new Promise((resolve, reject) => {
+      if (!validateInput(params.name)) {
         throw new Error(
-          "Emoji name is required! It must be unique and be at least two characters"
-        );
+          "Emoji name is required! It must be unique and be at least two characters");
+      }
+      if (!validateInput(params.uri)) {
+        throw new Error(
+          "Emoji URI (URL) is required! It must be at least two characters");
+      }
+
+      const formattedParams = {
+        name: formatInput(params.name),
+        uri: formatInput(params.uri)
+      }
+  
+      resolve(formattedParams);
     })
-      .then(() => knex("emojis").insert({ name: name.toLowerCase() }))
-      .then(() => {
+      .then(params => {
+        return knex("emojis").insert({
+          name: params.name,
+          uri: params.uri
+        })
+        .then( () => params )
+      })
+      .then( params => {
         return knex("emojis")
-          .where({ name: name.toLowerCase() })
+          .where({ name: params.name })
           .select();
       })
-      .then((emojis) => new Emoji(emojis.pop())) 
+      .then((emojis) => new Emoji(emojis.pop()))
       .catch((err) => {
         // sanitize known errors
         if (err.message.match("duplicate key value"))

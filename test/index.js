@@ -5,8 +5,12 @@ describe("emoji_api", () => {
 
   before("initialize database", (done) => {
     tables = ["emojis", "tags", "emojis_tags"];
-    Promise.all(tables.map(clearTable)).then(() => done());
+    Promise.all(tables.map(clearTable)).then(() => {
+      console.log("database initialized!");
+      done();
+    });
   });
+
   describe("_emojis.js", () => {
     require("./_emojis.js");
   });
