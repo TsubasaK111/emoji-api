@@ -13,7 +13,8 @@ exports.up = function (knex, Promise) {
     table
       .foreign("emoji_id")
       .references("id")
-      .inTable("emojis");
+      .inTable("emojis")
+      .onDelete("CASCADE");
 
     table
       .integer("tag_id")
