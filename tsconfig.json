@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "rootDir": "src",
+    "outDir": "dist",
+    "sourceMap": "true",
+    "noUnusedLocals": true,
+
+    "module": "ESNext",
+    "target": "ES2017",
+
+    "allowJs": true,
+    "checkJs": true
+  },
+  "include": [
+    "./src/"
+  ]
+}

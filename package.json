@@ -6,6 +6,7 @@
   "scripts": {
     "preinstall": "echo 'CREATE DATABASE emoji_api;' | psql",
     "postinstall": "yarn migrate",
+    "ts:compile": "tsc",
     "test": "mocha test && yarn lint",
     "lint": "eslint --fix ./**/*.js",
     "start": "node index.js",
@@ -14,9 +15,10 @@
   },
   "author": "TsubasaK111",
   "dependencies": {
+    "@types/node": "^10.5.4",
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
-    "knex": "^0.13.0",
+    "knex": "^0.15.2",
     "moment": "^2.18.1",
     "morgan": "^1.8.2",
     "nodemon": "^1.18.3",
@@ -24,6 +26,7 @@
     "pg-native": "^1.10.1"
   },
   "devDependencies": {
+    "awesome-typescript-loader": "^5.2.0",
     "chai": "^4.0.2",
     "eslint": "^4.16.0",
     "eslint-config-prettier": "^2.9.0",
@@ -31,6 +34,9 @@
     "eslint-plugin-prettier": "^2.6.0",
     "expect": "^1.20.2",
     "mocha": "^3.4.2",
-    "prettier": "^1.12.1"
+    "prettier": "^1.12.1",
+    "source-map-loader": "^0.2.3",
+    "tslint": "^5.11.0",
+    "typescript": "^2.9.2"
   }
 }
