@@ -2,16 +2,17 @@
   "name": "emoji-api",
   "version": "0.0.1",
   "description": "add, search and use emojis wherever you please with this RESTful API",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
-    "preinstall": "echo 'CREATE DATABASE emoji_api;' | psql",
+    "preinstall": "echo 'CREATE DATABASE emoji_api;' | psql && tsc",
     "postinstall": "npm run migrate",
     "ts:compile": "tsc",
+    "ts:lint": "tslint ./src/**/*.ts",
     "test": "mocha test && npm run lint",
     "lint": "eslint --fix ./**/*.js",
-    "start": "nodemon index.js",
-    "migrate": "knex migrate:latest --knexfile db/knexfile.js",
-    "rollback": "knex migrate:rollback --knexfile db/knexfile.js"
+    "start": "nodemon dist/index.js",
+    "migrate": "knex migrate:latest --knexfile ./dist/db/knexfile.js",
+    "rollback": "knex migrate:rollback --knexfile ./dist/db/knexfile.js"
   },
   "author": "TsubasaK111",
   "dependencies": {

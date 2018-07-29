@@ -9,4 +9,5 @@ const knexConfigs = {
 };
 
 // console.log(knexConfigs);
-module.exports = knexConfigs;
+export default knexConfigs;
+// module.exports = knexConfigs;

@@ -1,4 +1,5 @@
-module.exports = (knex, User) => {
+// module.exports = (knex, User) => {
+export default (knex, User) => {
   return () => {
     return knex
       .select("*")

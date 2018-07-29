@@ -1,3 +1,4 @@
+import list from "./list";
 
 class User{
 
@@ -22,6 +23,6 @@ class User{
 
 export default (knex) => {
   return {
-    list: require("./list")(knex, User),
+    list: list(knex, User),
   };
 };

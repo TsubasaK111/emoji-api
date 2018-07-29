@@ -2,7 +2,8 @@ import * as express from "express"
 
 const router = express.Router();
 
-module.exports = (db) => {
+// module.exports = (db) => {
+export default (db) => {
 
   router.get("/", (req, res) => {
     // return new Promise((resolve, reject) => {

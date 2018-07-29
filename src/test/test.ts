@@ -1,8 +1,8 @@
 import { expect } from "chai";
 
-// import * as config from "config"
+import config from "../config"
 import knex = require("knex"); knex(config.db);
-import db = require("../db"); db(config);
+import db = require("../db"); (db as any)(config);
 
 import { clearTable } from "./helper.js";
 // import  { forcePromiseReject } from "./helper.js";
@@ -21,15 +21,16 @@ describe("emoji_api", () => {
 
   describe("users", () => {
     it("setup has run the initial migrations", (done) => {
-      knex("users")
+      (knex as any)
         .select()
+        .from("users")
         .then(() => done())
         .catch((e) => console.log(e));
     });
 
     context("with dummy data", () => {
       before("add users", (done) => {
-        knex("users")
+        knex("users" as any)
           .insert([{ name: "dude" }, { name: "dudess" }])
           .then(() => {
             done();
@@ -37,7 +38,7 @@ describe("emoji_api", () => {
       });
 
       it("lists users", (done) => {
-        db.users.list().then((users) => {
+        (db as any).users.list().then((users) => {
           expect(users).to.be.an("array");
           expect(users).to.have.lengthOf(2);
           done();

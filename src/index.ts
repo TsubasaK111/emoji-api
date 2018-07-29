@@ -7,13 +7,17 @@ import * as bodyParser from "body-parser";
 // logs your requests
 import * as morgan from "morgan";
 
-// import config from "../config"
-const config = require("../config");
-import * as db from db(config);
-import * as apiRouter from "./routes/api"; apiRouter(db);
+// import config from "./config"
+const config = require("./config");
+import db from "./db";
+(db as any)(config);
+import * as apiRouter from "./routes/api"; (apiRouter as any)(db);
 
 class Server {
-  constructor(port) {
+  app: any;
+  logger: any;
+
+  constructor(port: number) {
     this.app = express();
     this.configure();
     this.start(port);
@@ -70,4 +74,4 @@ class Server {
   }
 }
 
-new Server();
+new Server(3001);
