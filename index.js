@@ -1,33 +1,28 @@
-
-// DEPENDENCIES
-
 const fs = require("fs");
 const path = require("path");
 
-const config = require("./config.js");
-// Database and other interfacing with external APIs)
-const db = require("./db")(config);
-// Routes. Initialized 'db' dependencies are explicitly injected.
-const apiRouter = require("./routes/api")(db);
-// logs your requests
-const morgan = require("morgan");
+const express = require("express");
 //enables express to parse JSON
 const bodyParser = require("body-parser");
+// logs your requests
+const morgan = require("morgan");
 
-const express = require("express");
+const config = require("./config.js");
+const db = require("./db")(config);
+const apiRouter = require("./routes/api")(db);
+
 
 class Server {
-  constructor() {
+  constructor(port) {
     this.app = express();
     this.configure();
-    this.start(config.express.port);
+    this.start(port);
   }
 
-  start(port) {
+  start(port = config.express.port) {
     this.app.listen(port, () => {
       console.info(`Server up and listening on port ${port}`);
     });
-
   }
 
   configure() {
@@ -55,7 +50,7 @@ class Server {
     });
 
     // 3. Parse request bodies as json
-    this.app.use(bodyParser.json({ type: "application/json", limit: "5mb" }));
+    this.app.use(bodyParser.json({ type: "application/json", limit: "2mb" }));
 
     // 4. If the requests begin with '/api', hand them off to API router
     this.app.use("/api", apiRouter);
