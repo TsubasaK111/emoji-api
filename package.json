@@ -6,7 +6,7 @@
   "scripts": {
     "preinstall": "echo 'CREATE DATABASE emoji_api;' | psql",
     "postinstall": "yarn migrate",
-    "test": "mocha test && yarn lint",
+    "test": "mocha test/index.js && yarn lint",
     "lint": "eslint --fix ./**/*.js",
     "start": "nodemon index.js",
     "migrate": "knex migrate:latest --knexfile db/knexfile.js",
