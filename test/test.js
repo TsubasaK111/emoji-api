@@ -7,6 +7,7 @@ const db = require("../db")(config);
 const { clearTable } = require("./helper.js");
 // const { forcePromiseReject } = require("./helper.js");
 
+
 describe("emoji_api", () => {
   let tables;
 
@@ -15,9 +16,6 @@ describe("emoji_api", () => {
     Promise.all(tables.map(clearTable)).then(() => done());
   });
 
-  it("true should be tru", () => {
-    expect(true).to.be.true;
-  });
 
   describe("emojis", () => {
     it("setup has run the initial migrations", (done) => {
@@ -46,6 +44,7 @@ describe("emoji_api", () => {
     });
   });
 
+
   describe("tags", () => {
     it("setup has run the initial migrations", (done) => {
       knex("tags")
@@ -70,6 +69,15 @@ describe("emoji_api", () => {
           done();
         });
       });
+    });
+  });
+
+  describe("emojis_tags junction table", () => {
+    it("setup has run the initial migrations", (done) => {
+      knex("tags")
+        .select()
+        .then(() => done())
+        .catch((e) => console.log(e));
     });
   });
 });
