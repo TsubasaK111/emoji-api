@@ -1,5 +1,6 @@
+import * as Knex from "knex";
 
-export function up(knex, Promise) {
+export function up(knex: Knex, Promise) {
   return knex.schema.createTable("users", table => {
     table
       .increments()
@@ -13,6 +14,6 @@ export function up(knex, Promise) {
   });
 };
 
-export function down(knex, Promise) {
+export function down(knex: Knex, Promise) {
   return knex.schema.dropTable("users");
 };

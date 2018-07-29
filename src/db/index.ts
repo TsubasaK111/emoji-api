@@ -6,6 +6,5 @@ export default function(config) {
   // pass connection to submodules.
   const knex = Knex({ ...config.db });
 
-
   return { users: users(knex) };
 };

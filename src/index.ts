@@ -10,8 +10,8 @@ import * as morgan from "morgan";
 // import config from "./config"
 const config = require("./config");
 import db from "./db";
-(db as any)(config);
-import * as apiRouter from "./routes/api"; (apiRouter as any)(db);
+db(config);
+import apiRouter from "./routes/api"; apiRouter(db);
 
 class Server {
   app: any;

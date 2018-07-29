@@ -1,8 +1,8 @@
 import { expect } from "chai";
 
 import config from "../config"
-import knex = require("knex"); knex(config.db);
-import db = require("../db"); (db as any)(config);
+import * as knex from "knex"; knex(config.db);
+import db from "../db"; db(config);
 
 import { clearTable } from "./helper.js";
 // import  { forcePromiseReject } from "./helper.js";
