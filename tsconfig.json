@@ -2,11 +2,12 @@
   "compilerOptions": {
     "rootDir": "src",
     "outDir": "dist",
-    "sourceMap": "true",
+    "sourceMap": true,
     "noUnusedLocals": true,
 
-    "module": "ESNext",
+    "module": "commonjs",
     "target": "ES2017",
+    "lib": ["ESNext"],
 
     "allowJs": true,
     "checkJs": true
