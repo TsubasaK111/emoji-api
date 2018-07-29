@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
 
-const userRouter = require("./user");
+const emojiRouter = require("./emoji");
 
 module.exports = (db) => {
-  router.use("/users", userRouter(db));
+  router.use("/emojis", emojiRouter(db));
 
   return router;
 };

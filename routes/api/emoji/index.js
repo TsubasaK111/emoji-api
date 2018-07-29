@@ -6,17 +6,17 @@ module.exports = (db) => {
 
   router.get("/", (req, res) => {
     // return new Promise((resolve, reject) => {
-    //   res.status(200).send('sup users!');
-    //   resolve("sup users!");
+    //   res.status(200).send('sup emojis!');
+    //   resolve("sup emojis!");
     // });
 
-    return db.users
+    return db.emojis
       .list()
-      .then((users) => {
-        console.log(users);
-        return users.map((user) => user.serialize())
+      .then(emojis => {
+        console.log(emojis);
+        return emojis.map((emoji) => emoji.serialize())
       })
-      .then((users) => res.status(200).json(users))
+      .then(emojis => res.status(200).json(emojis))
       .catch((err) => res.status(400).send(err.message))
   });
 
