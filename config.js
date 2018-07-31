@@ -12,5 +12,9 @@ module.exports = {
   // port for server to run on
   express: {
     port: 3001,
+  },
+
+  tokens: {
+    slackApiToken: process.env.SLACK_API_TOKEN,
   }
 };
