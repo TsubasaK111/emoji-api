@@ -5,27 +5,29 @@
   "main": "index.js",
   "scripts": {
     "preinstall": "echo 'CREATE DATABASE emoji_api;' | psql",
-    "postinstall": "yarn migrate",
+    "postinstall": "yarn migrate && yarn seed",
     "test": "mocha test/index.js && yarn lint",
     "lint": "eslint --fix ./**/*.js",
     "start": "nodemon index.js",
     "migrate": "knex migrate:latest --knexfile db/knexfile.js",
+    "seed": "knex seed:run --knexfile db/knexfile.js",
     "rollback": "knex migrate:rollback --knexfile db/knexfile.js"
   },
   "author": "TsubasaK111",
   "dependencies": {
     "body-parser": "^1.17.2",
-    "chai-http": "^4.0.0",
     "express": "^4.15.3",
     "knex": "^0.13.0",
     "moment": "^2.18.1",
     "morgan": "^1.8.2",
+    "node-fetch": "^2.2.0",
     "nodemon": "^1.18.3",
     "pg": "^6.4.0",
     "pg-native": "^1.10.1"
   },
   "devDependencies": {
     "chai": "^4.0.2",
+    "chai-http": "^4.0.0",
     "eslint": "^4.16.0",
     "eslint-config-prettier": "^2.9.0",
     "eslint-config-problems": "^0.1.1",
