@@ -24,7 +24,8 @@ exports.up = function (knex, Promise) {
     table
       .foreign("tag_id")
       .references("id")
-      .inTable("tags");
+      .inTable("tags")
+      .onDelete("CASCADE");
   });
 
   // ALTER TABLE "emoji_tags" ADD CONSTRAINT "emoji_tags_fk0" FOREIGN KEY ("emoji_id") REFERENCES "emojis"("id");

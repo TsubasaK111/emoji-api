@@ -16,7 +16,6 @@ module.exports = (knex, Emoji) => {
           .where("id", emojiId)
           .del()
       })
-      .then(result => console.log(result))
       .then(() => {
         return knex
           .select("*")

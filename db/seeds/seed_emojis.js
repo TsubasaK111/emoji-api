@@ -14,7 +14,6 @@ const getApiResults = (url, searchParams) => {
 exports.seed = function (knex, Promise) {
 
   const slackApiToken = config.tokens.slackApiToken;
-  console.log(slackApiToken);
 
   return getApiResults(
     "https://slack.com/api/emoji.list",

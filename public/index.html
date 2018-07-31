@@ -8,7 +8,123 @@
 </head>
 
 <body>
-  Sup Dawgs
-</body>
+  <h2 id="welcome-to-the-emoji-api-server-ta-da-">Welcome to the Emoji API Server! :ta-da:</h2>
+  <p><em>This API was created at the Code Chrysalis Intensive Bootcamp in July of 2018 by TsubasaK111.</em></p>
+  <p>By default, you can access all the custom emoji used by Cohort 5 (aka CC5 aka House Dustin aka House Justin aka House Tsuyoshi). It is fully RESTful :smile:. It is auth-less with no hard limits to the number of requests for your convenience, don&#39;t abuse it! :shrugs:</p>
+  <p>If you set up your own server, you can configure it to hook up to any Slack Organization that you are a member to. I&#39;d recommend you play with this instance for the time being, but you can set up your own server <a href="https://github.com/TsubasaK111/emoji-api">here</a>.</p>
+  <p>Here&#39;s what you can do with the API:</p>
+  <h2 id="list-all-emojis">List all Emojis</h2>
+  <p><code>GET localhost:3000/api/emojis</code> using curl or your browser to list all emojis.</p>
+  <h4 id="example-">Example:</h4>
+  <pre><code>&gt; curl GET <span class="hljs-string">localhost:</span><span class="hljs-number">3000</span><span class="hljs-regexp">/api/</span>emojis
+  [ 
+   {
+   <span class="hljs-string">"id"</span>: <span class="hljs-number">198</span>,
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"glitch_crab"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://emoji.slack-edge.com/TBAST357H/glitch_crab/db049f1f9c.png"</span>
+   },
+   {
+   <span class="hljs-string">"id"</span>: <span class="hljs-number">203</span>,
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"pride"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://emoji.slack-edge.com/TBAST357H/pride/56b1bd3388.png"</span>
+   }
+  ]
+  </code></pre><h2 id="show-all-information-related-to-an-emoji">Show all Information related to an emoji</h2>
+  <p><code>GET localhost:3000/api/emojis/:id</code> to get detailed information about an emoji, including custom tags. You can get the id of an emoji by first listing all of them with the <code>~/api/emojis/</code> request explained above.</p>
+  <h4 id="example-">Example:</h4>
+  <pre><code>&gt; curl <span class="hljs-string">localhost:</span><span class="hljs-number">3000</span><span class="hljs-regexp">/api/</span>emojis/<span class="hljs-number">203</span> -XGET
+  
+   {
+   <span class="hljs-string">"id"</span>: <span class="hljs-number">203</span>,
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"pride"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://emoji.slack-edge.com/TBAST357H/pride/56b1bd3388.png"</span>,
+   <span class="hljs-string">"tags"</span>: [<span class="hljs-string">"lgbt"</span>, <span class="hljs-string">"flag"</span>, <span class="hljs-string">"rainbow"</span>],
+   <span class="hljs-string">"createdAt"</span>: <span class="hljs-string">"2018-07-31T15:55:53.322Z"</span> 
+   }
+  </code></pre><h2 id="add-an-emoji">Add an emoji</h2>
+  <p>In addition to the custom emojis seededfrom your Slackorganization, you can add additional emoji that you would want to manage in the server with <code>POST localhost:3000/api/emojis/</code>. The body must be in JSON format.</p>
+  <h4 id="example-">Example:</h4>
+  <p>We&#39;re not using curl from this example because it gets too complicated. We highly recommend you use an API interaction tool like <a href="">Insomnia</a> for venturing around this API.</p>
+  <pre><code>
+  <span class="hljs-comment">// Request:</span>
+  POST <span class="hljs-string">localhost:</span><span class="hljs-number">3001</span><span class="hljs-regexp">/api/</span>emojis
+  <span class="hljs-string">body:</span> {
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"nooice"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://media.tenor.com/images/bcb961b67dc5ec34381372494c85c8fe/tenor.gif"</span>
+  }
+  
+  <span class="hljs-comment">// Response:</span>
+  {
+   <span class="hljs-string">"id"</span>: <span class="hljs-number">292</span>,
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"nooice"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://media.tenor.com/images/bcb961b67dc5ec34381372494c85c8fe/tenor.gif"</span>
+   <span class="hljs-string">"createdAt"</span>: <span class="hljs-string">"2018-07-31T15:55:53.322Z"</span>
+  }
+  </code></pre><h2 id="delete-an-emoji">Delete an emoji</h2>
+  <p>Whoops, want to remove an embarassing mistake? It&#39;s simple, just <code>DELETE localhost:3001/api/emojis/:id</code> !
+  Once again, you&#39;ll need the emojiId appended to the end of the url to specify the emoji to delete.</p>
+  <h4 id="example-">Example:</h4>
+  <pre><code><span class="hljs-comment">// Request (goodbye piggy emoji!)</span>
+  DELETE <span class="hljs-string">localhost:</span><span class="hljs-number">3001</span><span class="hljs-regexp">/api/</span>emojis/<span class="hljs-number">9</span>
+  
+  <span class="hljs-comment">// Response (id 199 [piggy emoji] is now gone)</span>
+  [
+   {
+   <span class="hljs-string">"id"</span>: <span class="hljs-number">198</span>,
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"glitch_crab"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://emoji.slack-edge.com/TBAST357H/glitch_crab/db049f1f9c.png"</span>
+   },
+   {
+   <span class="hljs-string">"id"</span>: <span class="hljs-number">200</span>,
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"cubimal_chick"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://emoji.slack-edge.com/TBAST357H/cubimal_chick/85961c43d7.png"</span>
+   }
+  ]
+  </code></pre><h2 id="modify-an-emoji">Modify an Emoji</h2>
+  <p>Want to change the name, url, tags etc of an emoji? It&#39;s time for <code>PATCH localhost:3001/api/emojis/:id</code> ! In the request body, include only the properties you wish to modify in JSON format.</p>
+  <pre><code>
+  // Request:
+  PATCH localhost:<span class="hljs-number">3001</span>/api/emojis/<span class="hljs-number">200</span>
+  body: {
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"yellow_chick"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://s17-us2.startpage.com/cgi-bin/serveimage?url=https%3A%2F%2Fpixnio.com%2Ffree-images%2F2017%2F02%2F08%2F2017-05-08-07-27-36.jpg&amp;sp=d3d9d1dd0da5b9afecd11b7762f678c8"</span>
+  }
+  
+  // Response:
+  {
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"yellow_chick"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://s17-us2.startpage.com/cgi-bin/serveimage?url=https%3A%2F%2Fpixnio.com%2Ffree-images%2F2017%2F02%2F08%2F2017-05-08-07-27-36.jpg&amp;sp=d3d9d1dd0da5b9afecd11b7762f678c8https://media.tenor.com/images/bcb961b67dc5ec34381372494c85c8fe/tenor.gif"</span>,
+   <span class="hljs-string">"tags"</span>: [<span class="hljs-string">"cute"</span>, <span class="hljs-string">"chick"</span>, <span class="hljs-string">"yellow"</span>]
+   <span class="hljs-string">"createdAt"</span>: <span class="hljs-string">"2018-07-31T15:55:53.322Z"</span>
+  }
+  </code></pre><h2 id="add-tags">Add tags</h2>
+  <p>Using the patch request, you can also add tags to your emojis!
+  Any new tags will be appended to preexisting tags.</p>
+  <p>Example: </p>
+  <pre><code>// Request:
+  PATCH localhost:<span class="hljs-number">3001</span>/api/emojis/<span class="hljs-number">200</span>
+  body: {
+   <span class="hljs-string">"tags"</span>: [<span class="hljs-string">"trolling"</span>] 
+  }
+  
+  
+  
+  // Response:
+  {
+   <span class="hljs-string">"name"</span>: <span class="hljs-string">"yellow_chicknooicechick"</span>,
+   <span class="hljs-string">"uri"</span>: <span class="hljs-string">"https://s17-us2.startpage.com/cgi-bin/serveimage?url=https%3A%2F%2Fpixnio.com%2Ffree-images%2F2017%2F02%2F08%2F2017-05-08-07-27-36.jpg&amp;sp=d3d9d1dd0da5b9afecd11b7762f678c8https://media.tenor.com/images/bcb961b67dc5ec34381372494c85c8fe/tenor.gif"</span>,
+   <span class="hljs-string">"tags"</span>: [<span class="hljs-string">"cute"</span>, <span class="hljs-string">"chick"</span>, <span class="hljs-string">"yellow"</span>, <span class="hljs-string">"trolling"</span>]
+   <span class="hljs-string">"createdAt"</span>: <span class="hljs-string">"2018-07-31T15:55:53.322Z"</span>
+  }
+  </code></pre><h2 id="future-features">Future Features</h2>
+  <ul>
+  <li>The emoji API dev team is excited to announce that the following features are in the development timeline!<ul>
+  <li>Full-text search (including subtext, tags and names)</li>
+  <li>Slack integration (limited to cat bots only)</li>
+  </ul>
+  </li>
+  <li>If you&#39;ve noticed any bugs or would like to make requests, feel free to <a href="https://github.com/TsubasaK111/emoji-api/issues">post an issue on our github</a>.</li>
+  </ul>
+  </body>
 
 </html>

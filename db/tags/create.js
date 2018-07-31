@@ -40,12 +40,10 @@ module.exports = (knex, Tag) => {
           .where({ title: params.title })
           .select()
           .then((newTags) => {
-            // console.log(newTags);
             return { ...newTags.pop(), emojiId: params.emojiId };
           });
       })
       .then(tag => {
-        // console.log(tag);
         return knex("emojis_tags")
           .insert({
             emoji_id: tag.emojiId,

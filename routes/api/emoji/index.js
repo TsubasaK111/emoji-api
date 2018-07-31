@@ -15,7 +15,10 @@ module.exports = (db) => {
   router.get("/:emojiId", (req, res) => {
     return db.emojis
       .get(req.params)
-      .then(emoji => emoji.serve())
+      // .then(emoji => {
+      //   return db.tags.
+      // })
+      // .then(emoji => emoji.serve())
       .then(emoji => res.status(200).json(emoji))
       .catch((err) => res.status(400).send(err.message))
   });
@@ -28,7 +31,7 @@ module.exports = (db) => {
         if (err.message === "That emoji already exists") {
           return db.emojis
             .get({ name: req.body.name })
-            .then((emoji) => res.status(200).json(emoji.serve()));
+            .then((emoji) => res.status(200).json(emoji));
         }
 
         return res.status(400).send(err.message);

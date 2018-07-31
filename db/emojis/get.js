@@ -14,11 +14,16 @@ module.exports = (knex, Emoji) => {
     })
       .then(emojiId => {
         return knex
-          .select("*")
-          .from("emojis")
-          .where("id", emojiId)
+        .select("*")
+        .from("emojis")
+        // .innerJoin("emojis_tags", "emojis.id", "emojis_tags.emoji_id")
+        .where("emojis.id", emojiId)
       })
-      .then(emojis => new Emoji(emojis[0]))
+      .then(emojis => {
+        
+        console.log(emojis)
+        return new Emoji(emojis[0]);
+      })
       .catch(error => {
         throw new Error(`Error getting emojis`);
       });

@@ -23,7 +23,7 @@ module.exports = (knex, Emoji) => {
         name: formatInput(params.name),
         uri: formatInput(params.uri)
       }
-  
+
       resolve(formattedParams);
     })
       .then(params => {
@@ -31,9 +31,9 @@ module.exports = (knex, Emoji) => {
           name: params.name,
           uri: params.uri
         })
-        .then( () => params )
+          .then(() => params)
       })
-      .then( params => {
+      .then(params => {
         return knex("emojis")
           .where({ name: params.name })
           .select();
