@@ -6,7 +6,7 @@ class Tag{
   }
 
   serve() {
-  // Formats object, removes any data that shouldn't be sent to client.
+    // Formats object, removes any data that shouldn't be sent to client.
     return {
       id: this.id,
       title: this.title
@@ -16,6 +16,9 @@ class Tag{
 
 module.exports = (knex) => {
   return {
+    get: require("./get")(knex, Tag),
     list: require("./list")(knex, Tag),
+    create: require("./create")(knex, Tag),
+    delete: require("./delete")(knex, Tag),
   };
 };
