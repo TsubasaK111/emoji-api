@@ -5,45 +5,44 @@ const router = express.Router();
 module.exports = (db) => {
 
   router.get("/", (req, res) => {
-    // return new Promise((resolve, reject) => {
-    //   res.status(200).send('sup emojis!');
-    //   resolve("sup emojis!");
-    // });
-
     return db.emojis
       .list()
-      .then(emojis => {
-        console.log(emojis);
-        return emojis.map((emoji) => emoji.serialize())
-      })
+      .then(emojis => emojis.map((emoji) => emoji.serve()))
       .then(emojis => res.status(200).json(emojis))
       .catch((err) => res.status(400).send(err.message))
   });
 
   router.post("/", (req, res) => {
-    // return new Promise((resolve, reject) => {
-    //   res.status(200).send('sup emojis!');
-    //   resolve("sup emojis!");
-    // });
-
     return db.emojis
-      .create({
-        name: req.body.name,
-        uri: req.body.uri
-      })
-      .then(emoji => res.status(201).json(emoji.serialize()) )
+      .create({ ...req.body })
+      .then(emoji => res.status(200).json(emoji.serve()))
       .catch((err) => {
-        if (err.message === "That username already exists") {
-          return services.db.users
-            .get({ username: req.body.username })
-            .then((user) => res.status(200).json(user.serialize()));
+        if (err.message === "That emoji already exists") {
+          return db.emojis
+            .get({ name: req.body.name })
+            .then((emoji) => res.status(200).json(emoji.serve()));
         }
 
         return res.status(400).send(err.message);
       })
   });
 
-  
+  router.delete("/:emojiId", (req, res) => {
+    return db.emojis
+      .delete(req.params)
+      .then(emojis => emojis.map((emoji) => emoji.serve()))
+      .then(emojis => res.status(200).json(emojis))
+      .catch((err) => res.status(400).send(err.message))
+  });
 
+  router.patch("/:emojiId", (req, res) => {
+    return db.emojis
+      .update({
+        ...req.body,
+        emojiId: req.params.emojiId,
+      })
+      .then(emoji => res.status(200).json(emoji.serve()))
+      .catch((err) => res.status(400).send(err.message))
+  });
   return router;
 };

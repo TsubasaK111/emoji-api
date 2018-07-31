@@ -7,11 +7,12 @@ class Emoji{
     this.createdAt = new Date(dbEmoji.created_at);
   }
 
-  serialize() {
+  serve() {
   // Formats object, removes any data that shouldn't be sent to client.
     return {
       id: this.id,
-      name: this.name
+      name: this.name,
+      uri: this.uri
     };
   };
 }
@@ -20,5 +21,7 @@ module.exports = (knex) => {
   return {
     list: require("./list")(knex, Emoji),
     create: require("./create")(knex, Emoji),
+    delete: require("./delete")(knex, Emoji),
+    update: require("./update")(knex, Emoji),
   };
 };

@@ -9,7 +9,7 @@ function formatInput(text) {
 
 module.exports = (knex, Emoji) => {
   return (params) => {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       if (!validateInput(params.name)) {
         throw new Error(
           "Emoji name is required! It must be unique and be at least two characters");
