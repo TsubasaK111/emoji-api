@@ -14,7 +14,7 @@ module.exports = (db) => {
       .list()
       .then(tags => {
         console.log(tags);
-        return tags.map((tag) => tag.serialize())
+        return tags.map((tag) => tag.serve())
       })
       .then(tags => res.status(200).json(tags))
       .catch((err) => res.status(400).send(err.message))

@@ -19,6 +19,7 @@ class Emoji{
 
 module.exports = (knex) => {
   return {
+    get: require("./get")(knex, Emoji),
     list: require("./list")(knex, Emoji),
     create: require("./create")(knex, Emoji),
     delete: require("./delete")(knex, Emoji),

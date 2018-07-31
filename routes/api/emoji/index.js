@@ -12,6 +12,14 @@ module.exports = (db) => {
       .catch((err) => res.status(400).send(err.message))
   });
 
+  router.get("/:emojiId", (req, res) => {
+    return db.emojis
+      .get(req.params)
+      .then(emoji => emoji.serve())
+      .then(emoji => res.status(200).json(emoji))
+      .catch((err) => res.status(400).send(err.message))
+  });
+
   router.post("/", (req, res) => {
     return db.emojis
       .create({ ...req.body })

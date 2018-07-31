@@ -1,3 +1,5 @@
+const Promise = require("bluebird");
+
 function validateEmojiId(emojiId) {
   return (typeof emojiId === "number" &&
     emojiId >= 0)
@@ -10,20 +12,20 @@ function validateInput(text) {
 
 module.exports = (knex, Emoji) => {
   return (params) => {
-    return new Promise((resolve) => {
+    return Promise.try(() => {
       params.emojiId = Number(params.emojiId);
       if (!validateEmojiId(params.emojiId)) throw new Error(`Emoji id is required! ${emojiId}`);
-      resolve(params);
+      return params;
     })
       .then(params => {
         return knex("emojis")
-          .where({id: params.emojiId})
+          .where({ id: params.emojiId })
           .update({
             name: params.name,
             uri: params.uri,
             subtext: params.subtext,
           })
-          .then( () => params )
+          .then(() => params)
       })
       .then(params => {
         return knex("emojis")

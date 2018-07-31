@@ -5,7 +5,7 @@ class Tag{
     this.createdAt = new Date(dbTag.created_at);
   }
 
-  serialize() {
+  serve() {
   // Formats object, removes any data that shouldn't be sent to client.
     return {
       id: this.id,
